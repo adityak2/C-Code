@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main()
+{
+    int number, lastdigit, firstdigit;
+    printf("Enter number: ");
+    scanf("%d", &number);
+    lastdigit= number%10;
+    while(number>=10)
+    {
+        number=number/10;
+    }
+    printf("%d\n", lastdigit);
+    printf("%d", number);
+}
