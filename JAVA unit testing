@@ -1,0 +1,242 @@
+package lab3;
+import balloon4.Balloon;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+
+public class BalloonTests {
+    
+	@Test
+	public void InitialBalloonSize()
+	{
+		Balloon b = new Balloon(100);
+		assertEquals(0, b.getRadius());
+	}
+	
+	@Test
+	public void NewBalloonCantBePopped()
+	{
+		Balloon b1 = new Balloon(100);
+		assertEquals(false, b1.isPopped());
+	}
+	
+    @Test
+    public void Tblow()
+    {
+      Balloon b2 = new Balloon(10);
+      b2.blow(5);
+      assertEquals(5, b2.getRadius());
+    }
+
+    @Test
+    public void Tdeflate()
+    {
+      Balloon b3 = new Balloon(100);
+      b3.blow(5);
+      b3.deflate();
+      assertEquals(0, b3.getRadius());
+    }
+    
+    @Test
+    public void TgetRadius()
+    {
+      Balloon b4 = new Balloon(100);
+      b4.blow(3);
+      assertEquals(3, b4.getRadius());
+    }
+    
+    @Test
+    public void TisPopped()
+    {
+    	Balloon b5 = new Balloon(100);
+    	b5.blow(5);
+    	b5.pop();
+    	assertEquals(true, b5.isPopped());
+    }
+    
+    @Test
+    public void Tpop()
+    {
+    	Balloon b6 = new Balloon(100);
+    	b6.pop();
+    	assertTrue(b6.isPopped());
+    }
+   
+ }
+------------------------------------
+package lab3;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import balloon.Balloon;
+
+public class BalloonTests
+{
+ 
+    
+    @Test
+    public void testInitialSize()
+    {
+    	Balloon bb = new Balloon(10);
+      assertEquals(0, bb.getRadius());
+    }
+
+    @Test
+    public void testIfInitiallyPopped()
+    {
+    	Balloon bb = new Balloon(10);
+      assertEquals(false, bb.isPopped());
+    }
+
+    @Test
+    public void testBlow()
+    {
+    	Balloon bb = new Balloon(10);
+      bb.blow(5);
+      assertEquals(5, bb.getRadius());
+    }
+
+    @Test
+    public void testGetRadius()
+    {
+    	Balloon bb = new Balloon(10);
+    	assertEquals(0, bb.getRadius());
+    }
+    
+    @Test
+    public void testDeflate()
+    {
+    	Balloon bb = new Balloon(10);
+      bb.blow(5);
+      bb.deflate();
+      assertEquals(0, bb.getRadius());
+    }
+    
+    @Test
+    public void testIsPopped()
+    {
+    	Balloon bb = new Balloon(10);
+      bb.blow(5);
+      assertEquals(false, bb.isPopped());
+    }
+    
+    @Test
+    public void testPop()
+    {
+    	Balloon bb = new Balloon(10);
+    	bb.blow(5);
+    	bb.pop();
+    	assertEquals(true, bb.isPopped());
+    }
+   
+  }
+-----------------------------------------------
+package lab3;
+import org.junit.Test;
+import balloon.Balloon;
+
+public class BalloonTests
+{
+  public static void main(String[] args)
+  {
+    Balloon b = new Balloon(10);
+    
+    @Test
+    System.out.println(b.getRadius());
+    System.out.println("Expected: 0");
+    
+    @Test
+    System.out.println(b.isPopped());
+    System.out.println("Expected: False");
+    
+    @Test
+    b.blow(5);
+    System.out.println(b.getRadius());
+    System.out.println("Expected: 5");
+    
+    @Test
+    b.deflate();
+    System.out.println(b.getRadius());
+    System.out.println("Expected: 0");
+    
+    @Test
+    b.isPopped();
+    System.out.println(b.isPopped());
+    System.out.println("Expected: false");
+    
+    
+    @Test
+    b.pop();
+    System.out.println(b.isPopped());
+    System.out.println("Expected: True");
+  }
+}
+----------------------------------------------
+package lab3;
+import balloon1.Balloon;
+import org.junit.Test;
+
+
+public class BalloonTests {
+    
+	@Test
+	public void InitialBalloonSize()
+	{
+		Balloon b = new Balloon(100);
+		System.out.println(b.getRadius());
+	    System.out.println("Expected: 0");
+	}
+	
+	@Test
+	public void NewBalloonCantBePopped()
+	{
+		Balloon b = new Balloon(100);
+		System.out.println(b.isPopped());
+	    System.out.println("Expected: False");
+	}
+	
+    @Test
+    public void Tblow()
+    {
+      Balloon b = new Balloon(10);
+      b.blow(5);
+      System.out.println(b.getRadius());
+      System.out.println("Expected: 5");
+    }
+
+    @Test
+    public void Tdeflate()
+    {
+      Balloon b = new Balloon(100);
+      b.deflate();
+      System.out.println(b.getRadius());
+      System.out.println("Expected: 0");
+    }
+    
+    @Test
+    public void TgetRadius()
+    {
+      Balloon b = new Balloon(100);
+      b.blow(3);
+      System.out.println(b.getRadius());
+      System.out.println("Expected: 3");
+    }
+    
+    @Test
+    public void TisPopped()
+    {
+    	Balloon b = new Balloon(100);
+    	b.blow(3);
+        System.out.println(b.isPopped());
+        System.out.println("Expected: false");
+    }
+    
+    @Test
+    public void Tpop()
+    {
+    	Balloon b = new Balloon(100);
+    	b.pop();
+        System.out.println(b.isPopped());
+        System.out.println("Expected: True");
+    }
+   
+ }
