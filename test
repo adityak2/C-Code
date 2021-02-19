@@ -1,0 +1,41 @@
+public void channelDown()
+	{
+		return 0;
+	}
+
+	public void channelUp()
+	{
+		return 0;
+	}
+	
+	public String display()
+	{
+		return 0;
+	}
+	
+	public int getChannel()
+	{
+		return 0;
+	}
+  
+  
+  
+  
+  
+  
+  
+  
+  	public void goToPreviousChannel()
+	{
+		return 0;
+	}
+	
+	public void resetStart(int givenStart)
+	{
+		return 0;
+	}
+	
+	public void resetNumChannels(int givenNumChannels)
+	{
+		return 0;
+	}
