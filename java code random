@@ -1,0 +1,444 @@
+package hw1;
+
+/**
+ * 
+ * @author Aditya Kumar
+ * A model which includes the channel and volume controls for a TV
+ */
+public class TV 
+{
+	
+	public static final double VOLUME_INCREMENT = 0.07;
+	
+	/**
+	 *  Variable which stores current volume
+	 */
+	private double myVolume;
+	private int currentChannel;
+	private int start;
+	private int NumChannels;
+	private int previousChannel;
+	
+	public TV(int givenStart, int givenNumChannels)
+	{
+		myVolume = 0.5;
+		
+		start = givenStart;
+		NumChannels = givenNumChannels;
+		
+		currentChannel = givenStart;
+		previousChannel = start;
+		
+	}
+	
+	public void channelDown()
+	{
+		previousChannel = currentChannel;
+		currentChannel = ( ( ( ( (currentChannel - start) - 1) + NumChannels ) ) % NumChannels ) + start;
+	}
+
+	public void channelUp()
+	{
+		previousChannel = currentChannel;
+		currentChannel = ( ( (currentChannel - start) + 1 ) % NumChannels ) + start;
+	}
+	
+	public String display()
+	{
+		int volumePercentage = (int) Math.round( (myVolume * 100) );
+		return ("Channel " + currentChannel + " Volume " + volumePercentage + "%");
+	}
+	
+	public int getChannel()
+	{
+		return currentChannel;
+	}
+  
+	public double getVolume()
+	{
+		return myVolume;
+	}
+	
+	public void goToPreviousChannel()
+	{
+		currentChannel = previousChannel;
+	}
+	
+	public void resetStart(int givenStart)
+	{
+		start = givenStart;
+		NumChannels = givenStart + (NumChannels -1);
+		currentChannel = Math.max(currentChannel, start);
+		previousChannel = Math.max(previousChannel, start);
+		
+	}
+	
+	public void resetNumChannels(int givenNumChannels)
+	{
+		NumChannels = start + (givenNumChannels - 1);
+		currentChannel = Math.min(currentChannel, NumChannels);
+		previousChannel = Math.min(previousChannel, NumChannels);
+	}
+	
+	
+	public void setChannel(int channelNumber)
+	{
+		previousChannel = currentChannel;
+		currentChannel = channelNumber;
+		if (channelNumber < start)
+		{
+			currentChannel = Math.max(channelNumber, start);
+		} if (channelNumber > start + (NumChannels - 1))
+		{
+			currentChannel = Math.min(channelNumber, start + (NumChannels - 1));
+		} else
+		{
+			
+		}
+		
+	} 
+	
+	
+	/** 
+	 *  Decreases the volume by 0.07
+	 */
+	public void volumeDown()
+	{
+		myVolume -= VOLUME_INCREMENT;
+		myVolume = Math.max(myVolume, 0.0);
+	}
+	
+	
+	
+	/** 
+	 *  Increases the volume by 0.07
+	 */
+	public void volumeUp()
+	{
+		myVolume += VOLUME_INCREMENT;
+		myVolume = Math.min(myVolume, 1.0);
+	}
+
+}
+------------------------------------------------------------------------------------------------
+package hw1;
+
+/**
+ * 
+ * @author Aditya Kumar
+ * A model which includes the channel and volume controls for a TV
+ */
+public class TV 
+{
+	
+	public static final double VOLUME_INCREMENT = 0.07;
+	
+	/**
+	 *  Variable which stores current volume
+	 */
+	private double myVolume;
+	private int currentChannel;
+	private int start;
+	private int NumChannels;
+	private int previousChannel;
+	
+	public TV(int givenStart, int givenNumChannels)
+	{
+		myVolume = 0.5;
+		
+		start = givenStart;
+		NumChannels = givenNumChannels;
+		
+		currentChannel = givenStart;
+		previousChannel = start;
+		
+	}
+	
+	public void channelDown()
+	{
+		previousChannel = currentChannel;
+		currentChannel = ( ( ( ( (currentChannel - start) - 1) + NumChannels ) ) % NumChannels ) + start;
+	}
+
+	public void channelUp()
+	{
+		previousChannel = currentChannel;
+		currentChannel = ( ( (currentChannel - start) + 1 ) % NumChannels ) + start;
+	}
+	
+	public String display()
+	{
+		int volumePercentage = (int) Math.round( (myVolume * 100) );
+		return ("Channel " + currentChannel + " Volume " + volumePercentage + "%");
+	}
+	
+	public int getChannel()
+	{
+		return currentChannel;
+	}
+  
+	public double getVolume()
+	{
+		return myVolume;
+	}
+	
+	public void goToPreviousChannel()
+	{
+		currentChannel = previousChannel;
+	}
+	
+	public void resetStart(int givenStart)
+	{
+		start = givenStart;
+		NumChannels = givenStart + (NumChannels -1);
+		currentChannel = Math.max(currentChannel, start);
+		previousChannel = Math.max(previousChannel, start);
+		
+	}
+	
+	public void resetNumChannels(int givenNumChannels)
+	{
+		NumChannels = start + givenNumChannels - 1;
+		currentChannel = Math.min(currentChannel, NumChannels);
+		previousChannel = Math.min(previousChannel, NumChannels);
+	}
+	
+	
+	public void setChannel(int channelNumber)
+	{
+		previousChannel = currentChannel;
+		currentChannel = channelNumber;
+		if (channelNumber < start)
+		{
+			currentChannel = Math.max(channelNumber, start);
+		} if (channelNumber > start + (NumChannels - 1))
+		{
+			currentChannel = Math.min(channelNumber, start + (NumChannels - 1));
+		} else
+		{
+			
+		}
+		
+	} 
+	
+	
+	/** 
+	 *  Decreases the volume by 0.07
+	 */
+	public void volumeDown()
+	{
+		myVolume -= VOLUME_INCREMENT;
+		myVolume = Math.max(myVolume, 0.0);
+	}
+	
+	
+	
+	/** 
+	 *  Increases the volume by 0.07
+	 */
+	public void volumeUp()
+	{
+		myVolume += VOLUME_INCREMENT;
+		myVolume = Math.min(myVolume, 1.0);
+	}
+
+}
+_________________________________________________________-
+
+package hw1;
+
+
+/**
+ * @author Aditya Kumar
+ * A model which includes the channel and volume controls for a TV
+ */
+public class TV 
+{
+	
+	/**
+	 * Variable which holds the incremental increase or decrease 
+	 * when volumeUp or volumeDown methods are called
+	 */
+	public static final double VOLUME_INCREMENT = 0.07;
+	
+	
+	/**
+	 * Variable which stores current volume
+	 */
+	private double myVolume;
+	
+	
+	/**
+	 * Variable which stores the current channel
+	 */
+	private int currentChannel;
+	
+	
+	/**
+	 * Variable which stores the starting channel
+	 */
+	private int start;
+	
+	
+	/**
+	 * Variable which stores the number of channels
+	 */
+	private int NumChannels;
+	
+	
+	/**
+	 * Variable which stores the previous channel
+	 */
+	private int previousChannel;
+	
+	
+	/**
+	 * Constructs a new TV with givenNumChannels available channels, numbered
+	 * consecutively beginning with givenStart
+	 * 
+	 * Initially the volume is 0.5
+	 *
+	 * @param givenStart
+	 * @param givenNumChannels
+	 */
+	public TV(int givenStart, int givenNumChannels)
+	{
+		myVolume = 0.5;
+		
+		start = givenStart;
+		NumChannels = givenNumChannels;
+		
+		currentChannel = givenStart;
+		previousChannel = start;
+		
+	}
+	
+	
+	/** 
+	 * Changes the channel down by 1, wrapping around to (start + numChannels - 1) if the the current
+	 * channel is start
+	 */
+	public void channelDown()
+	{
+		previousChannel = currentChannel;
+		currentChannel = ( ( ( ( (currentChannel - start) - 1) + NumChannels ) ) % NumChannels ) + start; // Channel is decreased by 1, using modular arithmetic
+	}
+
+	
+	/**
+	 * Changes the channel up by 1, wrapping around to start if the current 
+	 * channel is (start + numChannels - 1)
+	 * 
+	 */
+	public void channelUp()
+	{
+		previousChannel = currentChannel;
+		currentChannel = ( ( (currentChannel - start) + 1 ) % NumChannels ) + start; // Channel is decreased by 1, using modular arithmetic
+	}
+	
+	
+	/**
+	 * Returns a string representing the current channel and volume, where the volume is expressed as a percentage rounded to the nearest integer
+	 * @return
+	 */
+	public String display()
+	{
+		int volumePercentage = (int) Math.round( (myVolume * 100) ); // After multiplying myVolume with 100 to get a percentage, we use Math.round() to get a whole percentage.
+		return ("Channel " + currentChannel + " Volume " + volumePercentage + "%"); // returns a string with local variable volumePercentage
+	}
+	
+	
+	/**
+	 * Returns the current channel for the TV
+	 * @return
+	 */
+	public int getChannel()
+	{
+		return currentChannel;
+	}
+  
+	
+	/**
+	 * Returns the current volume for the TV
+	 * @return
+	 */
+	public double getVolume()
+	{
+		return myVolume;
+	}
+	
+	
+	/**
+	 * Sets the current channel to the most recent previous channel
+	 */
+	public void goToPreviousChannel()
+	{
+		currentChannel = previousChannel;
+	}
+	
+	
+	/**
+	 * Resets the value of the start channel
+	 * @param givenStart
+	 */
+	public void resetStart(int givenStart)
+	{
+		NumChannels = givenStart + (NumChannels - start); // Assigns NumChannels after resetting
+		start = givenStart; // Assigns start after resetting
+		currentChannel = Math.max(currentChannel, start);
+		previousChannel = Math.max(previousChannel, start);
+		
+	}
+	
+	
+	/** 
+	 * Resets the value of the number of channels (NumChannels)
+	 * @param givenNumChannels
+	 */
+	public void resetNumChannels(int givenNumChannels)
+	{
+		NumChannels = start + givenNumChannels - 1; // Assigns NumChannels after resetting
+		currentChannel = Math.min(currentChannel, NumChannels);
+		previousChannel = Math.min(previousChannel, NumChannels);
+	}
+	
+	
+	/**
+	 * Sets the channel number to the given channel number
+	 * @param channelNumber
+	 */
+	public void setChannel(int channelNumber)
+	{
+		previousChannel = currentChannel;
+		currentChannel = channelNumber;
+		if (channelNumber < start) // Conditional statement determines if provided channelNumber is outside the range
+		{
+			currentChannel = Math.max(channelNumber, start); // currentChannel is assigned value of start, if channelNumber is before start
+		} if (channelNumber > start + (NumChannels - 1))
+		{
+			currentChannel = Math.min(channelNumber, start + (NumChannels - 1)); // currentChannel is assigned the value of (start + (NumChannels -1)) if channelNumber is after (start + (NumChannels -1))
+		}
+	} 
+	
+	
+	/** 
+	 *  Decreases the volume by 0.07
+	 */
+	public void volumeDown()
+	{
+		myVolume -= VOLUME_INCREMENT;
+		myVolume = Math.max(myVolume, 0.0); // Math.max() ensures that volume does not go down the limit
+	}
+	
+	
+	/** 
+	 *  Increases the volume by 0.07
+	 */
+	public void volumeUp()
+	{
+		myVolume += VOLUME_INCREMENT;
+		myVolume = Math.min(myVolume, 1.0); // Math.min() ensures that volume does not go up the limit
+	}
+
+}
+
