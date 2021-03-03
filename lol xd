@@ -1,0 +1,289 @@
+    Padlock p = new Padlock(10, 20, 30);
+    printPositions(p);                   // expected 4 2 0
+    p.setPositions(42, 137, 17);         // order of args is back to front (disc 1, 2, 3)
+    printPositions(p);  // expected 42 137 17 
+    p.setPositions(-90, 800, 42);
+    printPositions(p); 
+    
+    System.out.println(p.isOpen()); // expected true
+    System.out.println(p.isAligned()); // expected false
+    p.close();
+    System.out.println(p.isOpen()); // expected false
+    p.open(); // does nothing; it's locked
+    System.out.println(p.isOpen()); // expected false
+    p.setPositions(6, 22, 30);
+    printPositions(p); // expected 6, 22, 30
+    System.out.println(p.isAligned()); // expected true
+    // now we should be able to open it!
+    p.open();
+    System.out.println(p.isOpen()); // expected true
+    System.out.println();
+    
+    p.setPositions(4, 2, 0);
+    p.turn(10); // 10 degrees ccw
+    System.out.println(p.getDiscPosition(3)); // expected 10
+    p.turn(-100); // 100 degrees cw
+    System.out.println(p.getDiscPosition(3)); // expected 270
+    p.turn(800);
+    System.out.println(p.getDiscPosition(3)); // expected 350
+    System.out.println();
+    
+    
+    p.setPositions(0, 90, 30);
+    p.turn(70);
+    printPositions(p); // expected 0 102 100
+    
+    p.setPositions(0, 20, 350);
+    p.turn(50);
+    printPositions(p); // expected 0 42 40
+    p.setPositions(0, 350, 20);
+    printPositions(p);
+    p.turn(-40);
+    printPositions(p); // expected 0 338 340
+    System.out.println("--------------------");
+    p.setPositions(10, 40, 30);
+    printPositions(p);
+    p.turn(-400);
+    printPositions(p); // expected 45 348 350
+    
+    p.turn(-720); // spin it twice clockwise
+    p.turnRightTo(10);
+    p.turn(360 - Padlock.TOOTH); // counterclockwise a full revolution
+    p.turnLeftTo(20);
+    p.turnRightTo(30);
+    System.out.println(p.isAligned()); // expected true
+    p.open();
+    System.out.println(p.isOpen()); // hooray
+    
+  }
+  ------------------------------------------------------------------------------
+  package hw2;
+
+import java.util.Random;
+
+public class Padlock
+{
+	public static final int TOOTH = 2;
+	
+	private int disc1pos; // end disc
+	private int disc2pos; // middle disc
+	private int disc3pos; // front disc
+	
+	private int offset1;
+	private int offset2;
+	private int offset3;
+	
+	private boolean lockStatus;
+	
+	
+	public Padlock(int n1, int n2, int n3)
+	{
+		disc3pos = 0;
+		disc2pos = 2;
+		disc1pos = 4;
+			 	
+	    offset1 = n1 - 2 * TOOTH;
+		offset2 = n2 + TOOTH;
+		offset3 = n3;
+		
+		lockStatus = true; // true for open, false for closed.
+	}
+	
+	public void close()
+	{
+		lockStatus = false;
+	}
+	
+	public int getDiscPosition(int which)
+	{
+		if (which == 1)
+		{
+			return disc1pos;
+		}
+		else if (which == 2)
+		{
+			return disc2pos;
+		}
+		else if (which == 3)
+		{
+			return disc3pos;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	
+	
+	public boolean isAligned()
+	{
+		int tempOffset1;
+		if (offset1 < 0)
+		{
+			tempOffset1 = 360 - Math.abs(offset1);
+		}
+		else
+		{
+			tempOffset1 = offset1;
+		}
+		
+		if (disc3pos == offset3 && disc2pos == offset2 && disc1pos == tempOffset1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean isOpen()
+	{
+		if (lockStatus == true)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public void open()
+	{
+		if (isAligned() == true)
+		{
+			lockStatus = true;
+		}
+		
+	}
+	
+	public void randomizePositions(Random rand)
+	{
+		setPositions(rand.nextInt(360), rand.nextInt(360), rand.nextInt(360));
+	}	
+	public void setPositions(int n1, int n2, int n3)
+	{
+		
+		if (n1 < 0) // 1
+		{
+			n1 = Math.abs(360 + n1);
+		}
+		if (n1 > 360)
+		{ 
+			n1 = n1 % 360;
+		}
+		
+		
+		if (n2 < 0) // 2
+		{
+			n2 = Math.abs(360 + n2);
+		}
+		if (n2 > 360)
+		{ 
+			n2 = n2 % 360;
+		}
+		if (n2 == 0)
+		{
+			n2 = 1;
+		}
+		
+		
+		if (n3 < 0) // 3
+		{
+			n3 = Math.abs(360 + n3);
+		}
+		if (n3 > 360)
+		{ 
+			n3 = n3 % 360;
+		}
+		
+		disc3pos = n3;
+		
+		if ( (n3 - TOOTH) < n2 && n2 < (n3 + TOOTH) )
+		{
+			disc2pos = n3 + TOOTH;
+		}
+		else
+		{
+			disc2pos = n2;
+		}
+		
+		if ( (n2 - TOOTH) < n1 && n1 < (n2 + TOOTH) )
+		{
+			disc1pos = n2 + TOOTH;
+		}
+		else
+		{
+			disc1pos = n1;
+		}
+		
+		
+	}
+	
+	public void turn(int degrees)
+	{
+		if (degrees < 0)
+		{
+			int tempdisc2pos = disc2pos + (degrees + 360 - (disc2pos - disc3pos) - TOOTH);
+			int tempdisc1pos = disc1pos - ((Math.abs(degrees) - (360 - (disc2pos - disc3pos) - TOOTH) + ((disc1pos - disc2pos) + TOOTH)));
+			int disc1ComplementAngle;
+			if ((disc1pos - disc2pos) > 0)
+			{
+				disc1ComplementAngle = 360 - (disc1pos - disc2pos) - TOOTH;
+			}
+			else
+			{
+				disc1ComplementAngle = Math.abs(disc1pos - disc2pos) - TOOTH;
+			}
+			
+			if (disc1ComplementAngle > (Math.abs(degrees) - (360 - (disc2pos - disc3pos) - TOOTH)))
+			{
+				setPositions(disc1pos, tempdisc2pos, 360 + (disc3pos + degrees));
+			}
+			else
+			{
+				setPositions(tempdisc1pos, tempdisc2pos, 360 + (disc3pos + degrees));	
+			}			
+		}
+		
+		else if (degrees > 360)
+		{
+			setPositions(disc1pos + (disc3pos + degrees % 360), disc2pos + (disc3pos + degrees % 360), disc3pos + degrees % 360);
+		}
+		
+		else if (degrees == 0)
+		{
+			setPositions(disc1pos, disc2pos, disc3pos);
+		}
+		else
+		{
+			setPositions(0, disc2pos + (degrees - (disc2pos - disc3pos - TOOTH)), disc3pos + degrees);
+		}
+		
+	}
+	
+	public void turnLeftTo(int number)
+	{
+		int CCWnumber= (-1) * number;
+		turn(CCWnumber);
+	}
+	
+	public void turnRightTo(int number)
+	{
+		turn(number);
+	}
+
+}
+--------------------------
+if ((disc1pos - disc2pos) < 0) //(Math.abs(degrees) - (360 - (disc2pos - disc3pos) - TOOTH)))
+			{
+				tempdisc1pos = disc1pos - ((Math.abs(degrees) - (360 - (disc2pos - disc3pos) - TOOTH)) - Math.abs(disc1pos - disc2pos) + TOOTH);
+			}
+			else
+			{
+				tempdisc1pos = disc1pos;
+				
+			}
+			setPositions(tempdisc1pos, tempdisc2pos, tempdisc3pos);
+		}
