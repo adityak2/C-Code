@@ -1,0 +1,188 @@
+package mini1;
+
+import java.util.*;
+public class LoopaholicsAnonymous
+{
+	private LoopaholicsAnonymous() {}
+	
+	public static int findEscapeCount​(double x, double y, int maxIterations)
+	{
+		double a = 0, b = 0;
+		while ( !((a * a + b * b) > 4) )
+        {
+			
+			if ( !((a * a + b * b) > 4) )
+			{
+				double newA = a * a - b * b + x;
+				double newB = 2 * a * b + y;
+				a = newA;
+			    b = newB;
+			} else {
+				return
+			}
+	        
+        	
+        }
+		
+	
+	}
+	
+	public static int findNth​(String s, char ch, int n)
+	{
+		int nthPos = 0;
+		for(int i = 0; i <= s.length() - 1; i++)
+		{
+			if (s.charAt(i) == ch)
+			{
+				int nCount = 0;
+				if(nCount == n)
+				{
+					nthPos = i;
+				}
+				else
+				{
+					nCount += 1;
+				}
+				
+			}
+			else
+			{
+				return -1;
+			}
+		}
+		return nthPos;
+	}
+	
+	public static java.lang.String getRun​(java.lang.String s, int start)
+	{
+		int count = 0;
+		for(int i = 0; i <= s.length() - 1; i++)
+		{
+			int current = s.charAt(start);
+			if (current == s.charAt(i))
+			{
+				count += 1;
+			}
+			
+			
+		}
+		return s.substring(start,count);
+	}
+	
+	public static boolean isArithmetic​(java.lang.String text)
+	{
+		Scanner scanner = new Scanner(text);
+		scanner.useDelimiter(",");
+		for(int i = 0; i <= text.length() - 1; i++)
+		{
+			if (
+		}
+	}
+	
+	public static boolean subsequenceWithGaps​(java.lang.String source, java.lang.String target)
+	{
+		int count = 0;
+		for(int i = 0; i <= source.length() - 1; i++)
+		{
+			for(int y = 0; i <= target.length() - 1; y++)
+			{
+				if(source.charAt(i) == target.charAt(y))
+				{
+					count += 1;
+				}
+			}
+		}
+		if(count == target.length())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public static java.lang.String takeApartPreservingRuns​(java.lang.String s)
+	{
+		String s1 = "";
+		String s2 = "";
+		for(int i = 0; i <= s.length() - 1; i++)
+		{
+			if(i%2 == 0)
+			{
+				s1 += s.charAt(i);
+			}
+			if(i == 0)
+			{
+				s1 += s.charAt(i);
+			}
+			else
+			{
+				s2 += s.charAt(i);
+			}
+		}
+		String s3 = s1+" "+s2;
+		return s3;
+		
+	}
+	
+	public static java.lang.String longestAscendingSubstring​(java.lang.String s)
+	{
+	    boolean ACS = false;
+	    s += " "; 
+	    for (int i = 1; i < s.length(); i++)
+	    {
+	        if (s.charAt(i) == s.charAt(0))
+	        {
+	        	ACS = true;
+	        }
+	        else {
+	        	ACS = false;
+	        }
+	         
+	    }
+	    String s1 = ""+s.charAt(0);
+	    // start with the first character, see how long a run there is
+	    
+	    for (int i = 1; i <= s.length() - 1; i += 1)
+	    {
+	      if (s.charAt(i) < s.charAt(i-1))
+	      {
+	    	  s1 += s.charAt(i);
+	      }
+	      else
+	      {
+	    	  s1 = "";
+
+	      }
+	    }
+	    
+	    // this should be the length of the longest run we found
+	    if (ACS == true)
+	    {
+	    	return ""+s.charAt(0);
+	    }
+	    return s1;
+	}
+	
+	
+	
+	public static void printStars​(int n)
+	{
+		for(int i = 0; i < n; i++)//whitespace
+		{
+			for(int y = n - 1; y >= 0; i--)
+			{
+				System.out.print("-");
+				System.out.print("*");
+				System.out.println(" ");
+				System.out.print("*");
+				System.out.print("-");
+			}
+		}
+		
+		
+	}
+	
+
+}
